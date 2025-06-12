@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matuka Járműklíma Blog Vezérlőpult</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/blog.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Matuka Járműklíma Blog</h1>
+    </header>
+    <%- include('_nav') %>
+    <main>
+        <section class="stats">
+            <h2 style="font-size:1.5rem;color:#4a4e69;text-align:center;margin-bottom:1.5rem;">Statisztika</h2>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <h3>Publikált bejegyzések</h3>
+                    <p class="stat-number"><%= publishedPosts %></p>
+                </div>
+            </div>
+        </section>
+        <section class="recent-posts" style="margin-top:2.5rem;">
+            <h2 style="font-size:2rem;color:#22223b;margin-bottom:2rem;text-align:center;">Legutóbbi bejegyzések</h2>
+            <% if (posts && posts.length > 0) { %>
+                <ul class="blog-list" style="display:flex;flex-direction:column;gap:2.5rem;margin:0 10%;list-style:none;">
+                    <% posts.forEach(post => { %>
+                        <li class="blog-list-item" style="background:#fff;border-radius:12px;box-shadow:0 2px 16px rgba(34,34,59,0.07);padding:2rem 2.5rem 1.5rem 2.5rem;position:relative;">
+                            <form action="/blog/posts/<%= post.id || post._id %>/delete" method="POST" class="delete-x-form" style="position:absolute;top:1.2rem;right:1.2rem;z-index:2;">
+                                <button type="submit" class="delete-x-btn" title="Törlés" onclick="return confirm('Biztosan törlöd?')">&times;</button>
+                            </form>
+                            <h3 style="font-size:1.5rem;margin-bottom:0.5rem;"><a href="/blog/posts/<%= post.id || post._id %>" style="color:#22223b;text-decoration:none;transition:color 0.2s;font-weight:700;letter-spacing:0.5px;"> <%= post.title %> </a></h3>
+                            <div class="blog-meta" style="color:#888;font-size:1rem;margin-bottom:0.7rem;">Létrehozva: <%= new Date(post.createdAt).toLocaleDateString('hu-HU') %></div>
+                            <div style="margin-bottom:1.2rem;font-size:1.08rem;color:#333;line-height:1.6;word-break:break-word;overflow-wrap:break-word;">
+                                <%= post.content.slice(0, 30) %>...
+                            </div>
+                            <div style="display:flex;gap:0.7rem;align-items:center;flex-wrap:wrap;">
+                                <a href="/blog/posts/<%= post.id || post._id %>" class="btn btn-view-modern">Megtekintés</a>
+                                <a href="/blog/posts/<%= post.id || post._id %>/edit" class="btn btn-edit-modern">Szerkesztés</a>
+                            </div>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p class="no-posts">Nincs még bejegyzés. <a href="/blog/posts/new">Hozd létre az első bejegyzésed!</a></p>
+            <% } %>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; <%= new Date().getFullYear() %> Matuka Járműklíma Blog. Minden jog fenntartva.</p>
+    </footer>
+</body>
+</html>

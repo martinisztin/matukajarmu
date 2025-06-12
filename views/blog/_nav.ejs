@@ -1,0 +1,10 @@
+<nav class="dashboard-nav">
+    <a href="/blog">Főoldal</a>
+    <% if (typeof session !== 'undefined' && session && session.userId) { %>
+        <a href="/blog/dashboard">Vezérlőpult</a>
+        <a href="/blog/newpost">Új bejegyzés</a>
+        <a href="/blog/logout">Kijelentkezés</a>
+    <% } else { %>
+        <a href="/blog/login">Bejelentkezés</a>
+    <% } %>
+</nav>

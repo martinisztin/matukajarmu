@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matuka Járműklíma Blog</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/blog.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Matuka Járműklíma Blog</h1>
+    </header>
+    <%- include('_nav') %>
+    <section class="blog-hero">
+        <h1>Üdvözlünk a Matuka Járműklíma Blogon!</h1>
+        <p>Tippek, hírek, érdekességek és szakmai tanácsok autóklíma, karbantartás és autószerviz témában.<br>Fedezd fel legújabb bejegyzéseinket!</p>
+        <a href="#blog-list" class="blog-cta">Legfrissebb bejegyzések</a>
+    </section>
+    <main class="blog-list-section" id="blog-list">
+        <h2>Legfrissebb bejegyzések</h2>
+        <% if (posts && posts.length > 0) { %>
+            <ul class="blog-list">
+                <% posts.forEach(post => { %>
+                    <li class="blog-list-item">
+                        <h3><a href="/blog/posts/<%= post.id %>"><%= post.title %></a></h3>
+                        <div class="blog-meta">Létrehozva: <%= new Date(post.createdAt).toLocaleDateString('hu-HU') %></div>
+                        <div style="margin-bottom:1rem; word-break: break-word; overflow-wrap: break-word;">
+                            <%= post.content.slice(0, 30) %>...
+                        </div>
+                        <a href="/blog/posts/<%= post.id %>" class="read-more">Olvasd tovább</a>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+    </main>
+    <footer>
+        <p>&copy; <%= new Date().getFullYear() %> Matuka Járműklíma Blog. Minden jog fenntartva.</p>
+    </footer>
+</body>
+</html>

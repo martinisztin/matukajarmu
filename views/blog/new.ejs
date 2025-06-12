@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Új bejegyzés létrehozása | Matuka Járműklíma Blog</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/blog.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Matuka Járműklíma Blog</h1>
+    </header>
+    <%- include('_nav') %>
+    <section class="new-post-section">
+        <% if (typeof editMode !== 'undefined' && editMode && post) { %>
+            <h2>Bejegyzés szerkesztése</h2>
+            <form class="new-post-form" action="/blog/posts/<%= post.id || post._id %>/edit" method="POST">
+                <label for="title">Cím</label>
+                <input type="text" id="title" name="title" value="<%= post.title %>" required>
+
+                <label for="author">Szerző</label>
+                <input type="text" id="author" name="author" value="<%= post.author %>" required>
+
+                <label for="content">Tartalom</label>
+                <textarea id="content" name="content" required><%= post.content %></textarea>
+
+                <label for="tags">Címkék (vesszővel elválasztva)</label>
+                <input type="text" id="tags" name="tags" value="<%= post.tags %>" placeholder="pl. klíma, karbantartás, autó">
+
+                <div class="form-actions">
+                    <button type="submit">Mentés</button>
+                    <a href="/blog/dashboard" class="btn btn-edit" style="background:#f2e9e4;color:#22223b;">Mégse</a>
+                </div>
+            </form>
+        <% } else { %>
+            <h2>Új bejegyzés létrehozása</h2>
+            <form class="new-post-form" action="createPost" method="POST">
+                <label for="title">Cím</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="author">Szerző</label>
+                <input type="text" id="author" name="author" required>
+
+                <label for="content">Tartalom</label>
+                <textarea id="content" name="content" required></textarea>
+
+                <label for="tags">Címkék (vesszővel elválasztva)</label>
+                <input type="text" id="tags" name="tags" placeholder="pl. klíma, karbantartás, autó">
+
+                <div class="form-actions">
+                    <button type="submit">Mentés</button>
+                    <a href="/blog/dashboard" class="btn btn-edit" style="background:#f2e9e4;color:#22223b;">Mégse</a>
+                </div>
+            </form>
+        <% } %>
+    </section>
+    <footer>
+        <p>&copy; <%= new Date().getFullYear() %> Matuka Járműklíma Blog. Minden jog fenntartva.</p>
+    </footer>
+</body>
+</html>
