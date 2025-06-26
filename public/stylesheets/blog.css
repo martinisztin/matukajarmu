@@ -11,12 +11,19 @@
     letter-spacing: 1px;
 }
 .dashboard-nav {
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem;
-    background: #f2e9e4;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 5% 0.7rem 5%;
+  background: #f2e9e4;
+  z-index: 1;
+}
+.dashboard-nav .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem;
 }
 .dashboard-nav a {
     color: #4a4e69;
@@ -27,6 +34,35 @@
 }
 .dashboard-nav a:hover {
     color: #9a8c98;
+}
+.dashboard-nav .hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(34,34,59,0.07);
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.18s;
+  margin-left: auto;
+  z-index: 0;
+}
+.dashboard-nav .hamburger:focus,
+.dashboard-nav .hamburger:hover {
+  background: #f2e9e4;
+  box-shadow: 0 4px 16px rgba(231,76,60,0.13);
+}
+.dashboard-nav .hamburger span {
+  display: block;
+  height: 4px;
+  width: 26px;
+  background: #e74c3c;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: all 0.3s;
 }
 .stats {
     margin-bottom: 2.5rem;
@@ -83,6 +119,12 @@ footer {
         flex-direction: column;
         gap: 1rem;
     }
+    .dashboard-header h1 {
+    font-size: 1.3rem;
+    padding: 0.7rem 0 0.5rem 0;
+    line-height: 1.2;
+    text-align: center;
+  }
 }
 
 .blog-hero {
@@ -437,5 +479,60 @@ footer {
   }
   .blog-list-item {
     padding: 1.1rem 0.7rem 0.8rem 0.7rem;
+  }
+}
+
+.dashboard-nav .hamburger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 90px;
+  height: 38px;
+  background: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(34,34,59,0.07);
+  cursor: pointer;
+  margin: 0.7rem auto 0.7rem 0;
+  padding: 0 1.2rem;
+  outline: none;
+  gap: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
+.dashboard-nav .hamburger:focus,
+.dashboard-nav .hamburger:hover {
+  background: #f2e9e4;
+  box-shadow: 0 4px 16px rgba(231,76,60,0.13);
+}
+.dashboard-nav .hamburger span {
+  color: #e74c3c;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1;
+  background: none;
+  border: none;
+  box-shadow: none;
+  margin: 0 auto;
+  padding: 0;
+  display: block;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+.dashboard-nav .hamburger:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #e74c3c33;
+}
+@media (max-width: 900px) {
+  .dashboard-nav .nav-links {
+    display: none !important;
+  }
+  .dashboard-nav .hamburger {
+    display: flex;
+  }
+}
+@media (min-width: 901px) {
+  .dashboard-nav .hamburger {
+    display: none !important;
   }
 }

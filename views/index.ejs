@@ -16,7 +16,23 @@
           <li><a href="blog">Blog</a></li>
           <li><a href="#contact">Kapcsolat</a></li>
         </ul>
+        <div class="hamburger" id="hamburger-menu" aria-label="Menü megnyitása" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </nav>
+      <div class="mobile-nav-overlay" id="mobile-nav">
+        <div class="mobile-nav-content">
+          <button class="close-mobile-nav" id="close-mobile-nav" aria-label="Menü bezárása">&times;</button>
+          <ul>
+            <li><a href="#services" onclick="closeMobileNav()">Szolgáltatások</a></li>
+            <li><a href="#about" onclick="closeMobileNav()">Rólunk</a></li>
+            <li><a href="blog" onclick="closeMobileNav()">Blog</a></li>
+            <li><a href="#contact" onclick="closeMobileNav()">Kapcsolat</a></li>
+          </ul>
+        </div>
+      </div>
     </header>
 
     <section class="hero">
@@ -99,4 +115,25 @@
   </body>
   
   <script src="/javascripts/scroller.js"></script>
+  <script>
+  const hamburger = document.getElementById('hamburger-menu');
+  const mobileNav = document.getElementById('mobile-nav');
+  const closeBtn = document.getElementById('close-mobile-nav');
+
+  function openMobileNav() {
+    mobileNav.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', openMobileNav);
+  hamburger.addEventListener('keypress', function(e) { if (e.key === 'Enter') openMobileNav(); });
+  closeBtn.addEventListener('click', closeMobileNav);
+  mobileNav.addEventListener('click', function(e) {
+    if (e.target === mobileNav) closeMobileNav();
+  });
+  </script>
 </html>

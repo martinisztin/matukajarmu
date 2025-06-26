@@ -1,10 +1,56 @@
+<header class="dashboard-header">
+    <h1>Matuka Járműklíma Blog</h1>
+</header>
 <nav class="dashboard-nav">
-    <a href="/blog">Főoldal</a>
-    <% if (typeof session !== 'undefined' && session && session.userId) { %>
-        <a href="/blog/dashboard">Vezérlőpult</a>
-        <a href="/blog/newpost">Új bejegyzés</a>
-        <a href="/blog/logout">Kijelentkezés</a>
-    <% } else { %>
-        <a href="/blog/login">Bejelentkezés</a>
-    <% } %>
+    <ul class="nav-links">
+        <li><a href="/">Főoldal</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <% if (typeof session !== 'undefined' && session && session.userId) { %>
+            <li><a href="/blog/dashboard">Vezérlőpult</a></li>
+            <li><a href="/blog/newpost">Új bejegyzés</a></li>
+            <li><a href="/blog/logout">Kijelentkezés</a></li>
+        <% } else { %>
+            <li><a href="/blog/login">Bejelentkezés</a></li>
+        <% } %>
+    </ul>
+    <button class="blog-cta hamburger" id="hamburger-menu" aria-label="Menü megnyitása" tabindex="0" type="button">
+      Menü
+    </button>
+    <div class="mobile-nav-overlay" id="mobile-nav">
+      <div class="mobile-nav-content">
+        <button class="close-mobile-nav" id="close-mobile-nav" aria-label="Menü bezárása">&times;</button>
+        <ul>
+          <li><a href="/" onclick="closeMobileNav()">Főoldal</a></li>
+          <li><a href="/blog" onclick="closeMobileNav()">Blog</a></li>
+          <% if (typeof session !== 'undefined' && session && session.userId) { %>
+            <li><a href="/blog/dashboard" onclick="closeMobileNav()">Vezérlőpult</a></li>
+            <li><a href="/blog/newpost" onclick="closeMobileNav()">Új bejegyzés</a></li>
+            <li><a href="/blog/logout" onclick="closeMobileNav()">Kijelentkezés</a></li>
+          <% } else { %>
+            <li><a href="/blog/login" onclick="closeMobileNav()">Bejelentkezés</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
 </nav>
+<script>
+  const hamburger = document.getElementById('hamburger-menu');
+  const mobileNav = document.getElementById('mobile-nav');
+  const closeBtn = document.getElementById('close-mobile-nav');
+
+  function openMobileNav() {
+    mobileNav.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', openMobileNav);
+  hamburger.addEventListener('keypress', function(e) { if (e.key === 'Enter') openMobileNav(); });
+  closeBtn.addEventListener('click', closeMobileNav);
+  mobileNav.addEventListener('click', function(e) {
+    if (e.target === mobileNav) closeMobileNav();
+  });
+</script>

@@ -10,12 +10,9 @@
  
     </style>
 </head>
-<body>
-    <header class="dashboard-header">
-        <h1>Matuka Járműklíma Blog</h1>
-    </header>
+<body style="min-height:100vh;display:flex;flex-direction:column;">
     <%- include('_nav') %>
-    <section class="post-section">
+    <section class="post-section" style="flex:1 0 auto;">
         <h2 class="post-title"><%= post.title %></h2>
         <div class="post-meta">
             Szerző: <%= post.author %> &middot; Létrehozva: <%= new Date(post.createdAt).toLocaleDateString('hu-HU') %>
@@ -38,7 +35,7 @@
         </div>
         <% } %>
     </section>
-    <footer>
+    <footer style="flex-shrink:0;">
         <p>&copy; <%= new Date().getFullYear() %> Matuka Járműklíma Blog. Minden jog fenntartva.</p>
     </footer>
 </body>
